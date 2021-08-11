@@ -14,7 +14,6 @@ export default new Vuex.Store({
   mutations: {
     removeToDo(state, id) {
       state.todos = state.todos.filter(todo => todo.id != id)
-      console.log(id)
     },
   },
   
