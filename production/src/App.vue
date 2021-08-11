@@ -38,6 +38,7 @@ export default {
     },
   },
   computed: {
+    
     screenWidth() {
       if (this.windowInnerWidth >=1000) {
         return true;

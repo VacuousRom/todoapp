@@ -5,15 +5,17 @@
     <div class="list__container">
       <ul class="list__container--items">
         
-        <li class="list__container--item" v-for="(item, index) in $store.state.todos" :key="index" >
+        <li class="list__container--item" v-for="(item, index) in allToDos" :key="index" >
           <div class="list__container--main" @click="checkItem(item)">
-            <p class="list__container--done" :class="{'checked': item.completed}" ><i class="fas fa-check"></i></p>
+            <p class="list__container--done" :class="{'checked': item.completed}"><i class="fas fa-check"></i></p>
             <h3 class="list__container--title">{{item.title}}</h3>
             <p class="list__container--body" v-if="item.body">{{item.body}}</p>
+            <p>{{item.id}}</p>
             
           </div>
             
-            <p class="list__container--end" @click="deleteItem(item)"><i class="fas fa-trash-alt"></i></p>
+            <p class="list__container--end" @click="deleteToDo(item.id)"><i class="fas fa-trash-alt"></i></p>
+
           </li>
         
       </ul>
@@ -25,27 +27,18 @@
 import { mapGetters, mapActions } from 'vuex';
 
 export default {
-  data() {
-    return {
-      
-    }
-  },
+  
   methods: {
-    ...mapActions(['deleteToDo', 'fetchTodos']),
+    ...mapActions(['deleteToDo']),
 
     checkItem(item){
       item.completed=!item.completed;
     },
-    deleteItem(item){
-      let id = item.id
-      this.deleteToDo(id)
-    }
   },
-  created() {
-    
-      
-    
+  computed: {
+    ...mapGetters(['allToDos']),
   }
+  
 }
 </script>
 

@@ -32,6 +32,7 @@ export default {
             toDoBody: '',
             infoMessage: '',
             showMessage: false,
+            
         }
     },
     methods: {
@@ -41,8 +42,10 @@ export default {
                 let todo = {}
                 todo.title = this.toDoTitle;
                 todo.body = this.toDoBody;
+                todo.id = this.$store.state.todos.length+1;
                 this.addToDo(todo);
                 this.clearInputs();
+                this.displayMessage("A new task added.")
             }  else {
                 this.displayMessage("Please enter a title before creating a new entry.")
             }
@@ -52,12 +55,9 @@ export default {
             this.infoMessage = message;
             this.showMessage = true;
             setTimeout(()=> {
+                    this.showMessage = false;
                     
-                this.showMessage = false;
-                    
-                },1000)
-                
-                
+            },1000)                
         },
         clearInputs() {
             this.toDoTitle = '',

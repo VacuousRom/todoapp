@@ -8,8 +8,14 @@ export default new Vuex.Store({
     windowWidth: null,
     todos: [],
   },
+  getters: {
+    allToDos: state => state.todos
+  },
   mutations: {
-    removeToDo: (state, id) => state.todos = state.todos.filter(todo => todo.id !== id)
+    removeToDo(state, id) {
+      state.todos = state.todos.filter(todo => todo.id != id)
+      console.log(id)
+    },
   },
   
   actions: {
@@ -19,6 +25,7 @@ export default new Vuex.Store({
       .then((response) => response.json())
       .then((json) => this.state.todos = json);
     },
+
     //a function that posts with fetch API to jsonplaceholder and add the new item from the response to vuex
     async addToDo({commit}, todo) {
 
@@ -29,6 +36,7 @@ export default new Vuex.Store({
           body: todo.body,
           completed: false,
           userId: 1,
+          id: todo.id
         }),
         headers: {
           'Content-type': 'application/json; charset=UTF-8',
@@ -36,16 +44,15 @@ export default new Vuex.Store({
       })
         .then((response) => response.json())
         .then((json) => this.state.todos.unshift(json));
-
-
     },
+
     //a function that deletes the post by the callback id and then calls the mutation that filters to do list by id
     async deleteToDo({commit}, id) {
-      
       fetch(`https://jsonplaceholder.typicode.com/todos/${id}` , {
         method: 'DELETE',
       })
       commit('removeToDo', id)
-    }
+      
+    },
   }
 })

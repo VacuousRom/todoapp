@@ -10,13 +10,7 @@
 
 export default {
   name: 'home',
-  components: {
-  },
-  data() {
-    return {
-      
-    }
-  },
+  
   computed: {
     navbarPlacement() {
       if (this.$store.state.windowWidth >=1000) {
