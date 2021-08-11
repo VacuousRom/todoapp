@@ -10,7 +10,6 @@
             <p class="list__container--done" :class="{'checked': item.completed}"><i class="fas fa-check"></i></p>
             <h3 class="list__container--title">{{item.title}}</h3>
             <p class="list__container--body" v-if="item.body">{{item.body}}</p>
-            <p>{{item.id}}</p>
             
           </div>
             
